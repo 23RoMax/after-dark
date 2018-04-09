@@ -7,6 +7,7 @@
   </header>
   {{ range .Paginator.Pages }}
     {{ partial "page-summary.html" . }}
+    <p>{{ .Dir }} {{ .Date }} {{ .ReadingTime }} min</p>
   {{ end }}
 {{ end }}
 {{ define "footer" }}
