@@ -1,0 +1,33 @@
+<div id="particulatematter">
+  <script>
+    document.addEventListener("DOMContentLoaded", function getData () {
+
+      function appendData(data) {
+        console.log('Appending Data')
+        var mainContainer = document.getElementById("displayData");
+        var div = document.createElement("div");
+        div.innerHTML = 'PM 10: ' + data.data.sdsp1;
+        mainContainer.appendChild(div);
+        var div = document.createElement("div");
+        div.innerHTML = 'PM 2.5: ' + data.data.sdsp2;
+        mainContainer.appendChild(div);
+        var div = document.createElement("div");
+        div.innerHTML = 'Sample# taken: ' + data.data.sampleNumber + ' on ' + data.data.createdAt;
+        mainContainer.appendChild(div);s
+      }
+      fetch('https://us-central1-blog-1523231623641.cloudfunctions.net/api/data/latest').then(function (response) {
+      	// The API call was successful!
+      	return response.json();
+      }).then(function (data) {
+      	// This is the JSON from our response
+      	console.log(data);
+        appendData(data);
+      }).catch(function (err) {
+      	// There was an error
+      	console.warn('Something went wrong.', err);
+      });
+    })
+  </script>
+  <h2>Current atmospheric particulate matter in Germany - Berlin Mitte</h2>
+  <div id="displayData"></div>
+</div>
